@@ -1,0 +1,7 @@
+global_costmap:
+  global_path:
+    inflation_radius: 0.25  # example value
+
+local_costmap:
+  local_path:
+    inflation_radius: 0.25  # example value
