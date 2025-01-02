@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root BTCPP_format="4" main_tree_to_execute = "MainTree">
+    <BehaviorTree ID="MainTree">
+        <Fallback name="root_fallback">
+            <Sequence name="pickup_routine">
+                <GoToPose name = "pickup_point" loc="location1"/>
+                <RetryUntilSuccessful name="Shipment_loading_retries" num_attempts="8">
+                    <Fallback name="shipment_handling">
+                        <ShipmentLoaded name = "shipment_loaded"/>
+                        <WaitForLoading name = "wait_for_loading"/>
+                    </Fallback>
+                </RetryUntilSuccessful>
+                <GoToPose name = "drop_off_point" loc="location2"/>
+                <GoToPose name ="home_point" loc="location3"/>
+            </Sequence>
+        </Fallback>
+    </BehaviorTree>
+</root>
