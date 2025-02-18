@@ -21,8 +21,6 @@ void RosControl::setup()
         std::bind(&RosControl::update_behavior_tree, this)
     );
 
-    rclcpp::spin(shared_from_this());
-    rclcpp::shutdown();
 }
 
 void RosControl::initializing_behavior_tree()
@@ -34,9 +32,14 @@ void RosControl::initializing_behavior_tree()
     {
         return std::make_unique<GoToPose>(name, config, shared_from_this());
     };
+    BT::NodeBuilder builder1 = 
+        [=](const std::string &name, const BT::NodeConfiguration &config)
+    {
+        return std::make_unique<ShipmentLoaded>(name, config, shared_from_this());
+    };
     RCLCPP_INFO(get_logger(), "GoToPose node intialized");
     factory.registerBuilder<GoToPose>("GoToPose", builder);
-    factory.registerNodeType<ShipmentLoaded>("ShipmentLoaded");
+    factory.registerBuilder<ShipmentLoaded>("ShipmentLoaded", builder1);
     factory.registerNodeType<WaitForLoading>("WaitForLoading");
 
     tree1 = factory.createTreeFromFile(bt_xml_dir + "/bt_tree.xml");
@@ -44,7 +47,7 @@ void RosControl::initializing_behavior_tree()
 
 void RosControl::update_behavior_tree()
 {
-    BT::NodeStatus tree_status = tree1.tickWhileRunning();
+    BT::NodeStatus tree_status = tree1.tickOnce(); 
 
     if(tree_status == BT::NodeStatus::RUNNING){
         return;
@@ -67,4 +70,5 @@ int main(int argc, char **argv){
 
     rclcpp::spin(node);
     rclcpp::shutdown();
+    return 0;
 }

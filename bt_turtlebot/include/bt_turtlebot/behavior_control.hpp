@@ -12,6 +12,7 @@
 #include <string>
 #include <vector>
 #include <random>
+#include <atomic>
 
 class GoToPose : public BT::StatefulActionNode{
 public:
@@ -24,7 +25,7 @@ public:
     rclcpp::Node::SharedPtr node_ptr;
     rclcpp_action::Client<NavigateToPose>::SharedPtr action_client_ptr;
 
-    bool nav_done;
+    std::atomic<bool>  nav_done;
 
     static BT::PortsList providedPorts();
 
@@ -37,7 +38,10 @@ public:
 
 class ShipmentLoaded : public BT::ConditionNode{
 public:
-    ShipmentLoaded(const std::string &name);
+    ShipmentLoaded(const std::string &name, const BT::NodeConfiguration &config,
+                   rclcpp::Node::SharedPtr node_ptr);
+
+    rclcpp::Node::SharedPtr node_ptr;
 
     BT::NodeStatus tick() override;
 };

@@ -20,6 +20,8 @@ BT::PortsList GoToPose::providedPorts()
 
 BT::NodeStatus GoToPose::onStart()
 {
+    // In GoToPose class declaration
+    std::mutex callback_mutex_;
     auto loc = getInput<std::string>("loc");
     const std::string location_file = node_ptr->get_parameter("location_file").as_string();
 
@@ -42,7 +44,7 @@ BT::NodeStatus GoToPose::onStart()
 
     nav_done = false;
     action_client_ptr->async_send_goal(goal_msg, send_goal_options);
-    RCLCPP_INFO(node_ptr->get_logger(), "Sent Goal to Nav2\n");
+    RCLCPP_INFO(node_ptr->get_logger(), "Sent Goal to Compute Path Action Server");
 
     return BT::NodeStatus::RUNNING;
 }
@@ -51,7 +53,7 @@ BT::NodeStatus GoToPose::onRunning(){
     
     if (nav_done)
     {
-        RCLCPP_INFO(node_ptr->get_logger(), "[%s] Goal reached\n", this->name().c_str());
+        RCLCPP_INFO(node_ptr->get_logger(), "Goal reached - %s", this->name().c_str());
         return BT::NodeStatus::SUCCESS;
     }
     else{
@@ -60,30 +62,34 @@ BT::NodeStatus GoToPose::onRunning(){
 }
 
 void GoToPose::nav_to_pose_callback(const GoalHandleNav::WrappedResult &result)
-{
-    if (result.result)
+{    
+    RCLCPP_INFO(node_ptr->get_logger(), "Result callback triggered");
+    
+    if (result.code == rclcpp_action::ResultCode::SUCCEEDED)
     {
         nav_done = true;
-        RCLCPP_INFO(node_ptr->get_logger(),"Reached goal pose");
     }
 }
 
-ShipmentLoaded::ShipmentLoaded(const std::string &name)
-            :BT::ConditionNode(name, {})
+ShipmentLoaded::ShipmentLoaded(const std::string &name, const BT::NodeConfiguration &config,
+                   rclcpp::Node::SharedPtr node_ptr)
+            :BT::ConditionNode(name, config), node_ptr(node_ptr)
 {}
 
 BT::NodeStatus ShipmentLoaded::tick()
 {
-
-     std::default_random_engine gener_;
+    RCLCPP_INFO(node_ptr->get_logger(), "Checking shipment status");
+    std::default_random_engine gener_;
     std::uniform_int_distribution<int> distribution(0,1);
 
     int random_bool = distribution(gener_);
 
     if (random_bool==1){
+        RCLCPP_INFO(node_ptr->get_logger(), "Shipment successfully loaded.");
         return BT::NodeStatus::SUCCESS;
     }
     else{
+        RCLCPP_INFO(node_ptr->get_logger(), "Awaiting shipment loading...");
         return BT::NodeStatus::FAILURE;
     }
 }
