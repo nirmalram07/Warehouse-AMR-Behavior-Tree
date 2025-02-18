@@ -19,7 +19,7 @@ def generate_launch_description():
         ]),
         launch_arguments={'use_sim_time': use_sim_time,
                           'map' : os.path.join(spawn_pkg, 'map', 'factory_map.yaml'),
-                          'params' : os.path.join(spawn_pkg, 'config', 'nav2_params.yaml')}.items()
+                          'params_file' : os.path.join(spawn_pkg, 'config', 'nav2_params.yaml')}.items()
     )
 
     rviz_launc_conf = Node(
