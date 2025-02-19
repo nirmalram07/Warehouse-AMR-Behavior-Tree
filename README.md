@@ -14,9 +14,8 @@ This project demonstrates an autonomous mobile robot (AMR) navigating within a w
 - **Simulated Cargo Loading:** Random boolean generator determines if cargo is loaded (1) or not (0). In the event of failure, the simulation waits 5 seconds before retrying.
 
 ## Requirements
-- **Operating System:** Ubuntu (recommended for ROS compatibility)
-- **ROS:** [ROS (Robot Operating System)](http://wiki.ros.org/) installed and properly configured.
-- **Gazebo Simulator:** Compatible version with your ROS distribution.
+- **This project has been developed for ROS2 Humble**
+- **Gazebo Simulator:** I have used Gazebo Classic for this project.
 - **TurtleBot3 Packages:** Ensure you have the `turtlebot3_gazebo` package installed and set the default turtlemodel in your environment
 - **BehaviorTree.CPP:** Install the BehaviorTree.CPP library.
 - **C++:** C++17 or later for proper compilation.
@@ -38,10 +37,10 @@ This project demonstrates an autonomous mobile robot (AMR) navigating within a w
    
 3. **Launching the Nodes:**
    
-   ```bash
-   source install/setup.bash 
-   ros2 launch turtlebot3_gazebo turtlebot3_world.launch.py
-   ```
+      ```bash
+      source install/setup.bash 
+      ros2 launch turtlebot3_gazebo turtlebot3_world.launch.py
+      ```
    Now open a new terminal tab to launch the nav2_bringup node
    
       ```bash
@@ -57,6 +56,8 @@ This project demonstrates an autonomous mobile robot (AMR) navigating within a w
 
 Behavior Tree Structure
 
+![Behavior_tree Structure](image.png)
+
 The core functionality is driven by a Behavior Tree, which orchestrates the following sequence:
 
    •Start: The robot initializes at the home position.
@@ -67,6 +68,8 @@ The core functionality is driven by a Behavior Tree, which orchestrates the foll
    •Navigate to Drop-off: Once loaded, the robot moves to the drop-off point.
    •Return Home: The robot then returns to the home position.
    •Loop: The entire sequence repeats indefinitely.
+
+Future Updates:
 
 Contributing
 
