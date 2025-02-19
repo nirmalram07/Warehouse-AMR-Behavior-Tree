@@ -35,36 +35,38 @@ This project demonstrates an autonomous mobile robot (AMR) navigating within a w
    cd ../
    colcon build --symlink-install
    source install/setup.bash
+   
 3. **Launching the Nodes:**
    
    ```bash
-   source install/setup.bash
+   source install/setup.bash 
    ros2 launch turtlebot3_gazebo turtlebot3_world.launch.py
    
 #Now open a new terminal tab to launch the nav2_bringup node
 
    ```bash
-   source install/setup.bash
+   source install/setup.bash \
    ros2 launch turtlebot3_spawn turtlebot_gazebo.launch.py
-
+```
 #Now again open a new terminal to launch the behavior tree node
 
    ```bash
-   source install/setup.bash
+   source install/setup.bash \
    ros2 launch bt_turtlebot bt_node.launch.py
+```
 
 Behavior Tree Structure
 
 The core functionality is driven by a Behavior Tree, which orchestrates the following sequence:
 
-    Start: The robot initializes at the home position.
-    Navigate to Pickup: The robot moves to the designated pickup point.
-    Cargo Loading Simulation: A random boolean is generated to simulate cargo loading:
+   •Start: The robot initializes at the home position.
+   •Navigate to Pickup: The robot moves to the designated pickup point.
+   •Cargo Loading Simulation: A random boolean is generated to simulate cargo loading:
         If the result is 1, cargo is considered loaded.
         If the result is 0, the process waits 5 seconds before retrying.
-    Navigate to Drop-off: Once loaded, the robot moves to the drop-off point.
-    Return Home: The robot then returns to the home position.
-    Loop: The entire sequence repeats indefinitely.
+   •Navigate to Drop-off: Once loaded, the robot moves to the drop-off point.
+   •Return Home: The robot then returns to the home position.
+   •Loop: The entire sequence repeats indefinitely.
 
 Contributing
 
