@@ -42,13 +42,13 @@ This project demonstrates an autonomous mobile robot (AMR) navigating within a w
    source install/setup.bash 
    ros2 launch turtlebot3_gazebo turtlebot3_world.launch.py
    ```
-   #Now open a new terminal tab to launch the nav2_bringup node
+   Now open a new terminal tab to launch the nav2_bringup node
    
       ```bash
       source install/setup.bash
       ros2 launch turtlebot3_spawn turtlebot_gazebo.launch.py
       ```
-   #Now again open a new terminal to launch the behavior tree node
+   Now again open a new terminal to launch the behavior tree node
    
       ```bash
       source install/setup.bash
