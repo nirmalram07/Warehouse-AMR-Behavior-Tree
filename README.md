@@ -2,13 +2,21 @@
 
 ## Overview
 
-![Nav2_Bringup RViz image](RViz.png)
-![Gazebo Simulation World](Gazebo-sim.png)
 This project demonstrates an autonomous mobile robot (AMR) navigating within a warehouse environment using a Behavior Tree implementation in C++ and ROS. The simulation uses the TurtleBot3 Gazebo package along with a custom-built warehouse world to showcase:
 - Navigation from a home position to a pickup point.
 - A simulated cargo-loading process using a random boolean generator.
 - Movement to a drop-off point followed by a return to the home position.
 - An infinite loop of these tasks to demonstrate continuous operation using Behavior Trees.
+
+
+![Nav2_Bringup RViz image](RViz.png)
+
+
+Nav2_Bringup RViz image
+![Gazebo Simulation World](Gazebo-sim.png)
+
+
+Gazebo Simulation World
 
 ## Features
 - **Behavior Tree Integration:** Implements decision-making using BehaviorTree.CPP.
