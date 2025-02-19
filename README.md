@@ -37,7 +37,7 @@ Gazebo Simulation World
    ```bash
    mkdir amr-warehouse-sim
    cd amr-warehouse-sim
-   git clone https://github.com/nirmalram07/ros2_bt_demo.git
+   git clone https://github.com/nirmalram07/Warehouse-AMR-Behavior-Tree.git
 
 2. **Build the Packages:**
    
