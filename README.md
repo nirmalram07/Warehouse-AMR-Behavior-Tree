@@ -1,6 +1,9 @@
 # Simulation of Autonomous Mobile Robot in warehouse using Behavior Trees
 
 ## Overview
+
+![Nav2_Bringup RViz image](RViz.png)
+![Gazebo Simulation World](Gazebo-sim.png)
 This project demonstrates an autonomous mobile robot (AMR) navigating within a warehouse environment using a Behavior Tree implementation in C++ and ROS. The simulation uses the TurtleBot3 Gazebo package along with a custom-built warehouse world to showcase:
 - Navigation from a home position to a pickup point.
 - A simulated cargo-loading process using a random boolean generator.
@@ -54,23 +57,25 @@ This project demonstrates an autonomous mobile robot (AMR) navigating within a w
       ros2 launch bt_turtlebot bt_node.launch.py
       ```
 
-Behavior Tree Structure
+## Behavior Tree Structure
 
-![Behavior_tree Structure](image.png)
+![Behavior_tree Structure](Groot2-BT.png)
 
 The core functionality is driven by a Behavior Tree, which orchestrates the following sequence:
 
-   •Start: The robot initializes at the home position.
-   •Navigate to Pickup: The robot moves to the designated pickup point.
-   •Cargo Loading Simulation: A random boolean is generated to simulate cargo loading:
-        If the result is 1, cargo is considered loaded.
-        If the result is 0, the process waits 5 seconds before retrying.
-   •Navigate to Drop-off: Once loaded, the robot moves to the drop-off point.
-   •Return Home: The robot then returns to the home position.
-   •Loop: The entire sequence repeats indefinitely.
+1. Start: The robot initializes at the home position.
+2. Navigate to Pickup: The robot moves to the designated pickup point.
+3. Cargo Loading Simulation: A random boolean is generated to simulate cargo loading:
+   If the result is 1, cargo is considered loaded.
+   If the result is 0, the process waits 5 seconds before retrying.
+4. Navigate to Drop-off: Once loaded, the robot moves to the drop-off point.
+5. Return Home: The robot then returns to the home position.
+6. Loop: The entire sequence repeats indefinitely.
 
-Future Updates:
+## Future Updates:
 
-Contributing
+   Migration to Gazebo Ignition: We plan to transition from Gazebo Classic to Gazebo Ignition for improved simulation features and performance.
 
-Contributions are welcome! If you have suggestions, bug fixes, or improvements, please open an issue or submit a pull request.
+## Suggestions & Feedbacks
+
+   Contributions are welcome! If you have suggestions, bug fixes, or improvements, please open an issue or submit a pull request.
