@@ -37,6 +37,8 @@ Gazebo Simulation World
    ```bash
    mkdir amr-warehouse-sim
    cd amr-warehouse-sim
+   mkdir src
+   cd src
    git clone https://github.com/nirmalram07/Warehouse-AMR-Behavior-Tree.git
 
 2. **Build the Packages:**
@@ -87,3 +89,7 @@ The core functionality is driven by a Behavior Tree, which orchestrates the foll
 ## Suggestions & Feedbacks
 
    Contributions are welcome! If you have suggestions, bug fixes, or improvements, please open an issue or submit a pull request.
+
+## References
+
+   https://youtu.be/EOBbxBBDLxU?si=ZvmaB8f_Rf17MW9i
